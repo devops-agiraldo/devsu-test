@@ -1,6 +1,3 @@
-# devsu-test
-Repo tu push the artifacts of the devsu exam
-
 # Prueba Técnica Devsu
 
 Este repositorio contiene todos los artefactos utilizados para llevar a cabo la prueba técnica/práctica encomendada por Devsu. A continuación, se detallan los aspectos del desarrollo y algunos diagramas ilustrativos.
@@ -38,29 +35,51 @@ pipeline {
     agent any
 
     stages {
-        // ... (resto del código)
-
+        stage('verifyTools') {
+            options {
+                timeout(time: 1, unit: "MINUTES")
+            }
+            steps {
+                sh './verifyTools.sh'
+            }
+        }
+        stage('cloneProject') {
+            options {
+                timeout(time: 5, unit: "MINUTES")
+            }
+            steps {
+                sh './cloneRepo.sh'
+            }
+        }
+        stage('applyMvnTests') {
+            options {
+                timeout(time: 30, unit: "MINUTES")
+            }
+            steps {
+                sh './addPluggins.sh'
+                sh './executeTests.sh'
+            }
+        }
         stage('buildApp') {
             options {
                 timeout(time: 30, unit: "MINUTES")
             }
             steps {
                 dir('docker') {
-                    sh './buildImage.sh'
+                sh './buildImage.sh'
                 }
             }
         }
-
-        stage('deployApp') {
+            stage('deployApp') {
             options {
                 timeout(time: 30, unit: "MINUTES")
             }
             steps {
                 dir('k8s') {
-                    sh './createResourcesk8s.sh'
+                sh './createResourcesk8s.sh'
                 }
             }
         }
     }
 }
-Ejecutar el pipeline y esperar a que se creen todos los recursos
+- Ejecutar el pipeline y esperar a que se creen todos los recursos
