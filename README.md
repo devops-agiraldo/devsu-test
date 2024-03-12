@@ -12,6 +12,8 @@ El pipeline consta de 5 stages:
 - **buildApp:** Compila la aplicación de Devsu, genera una imagen Docker y la sube a DockerHub.
 - **deployApp:** Despliega la aplicación en Kubernetes.
 
+A continuación algunos diagramas referentes a la implementación:
+
 ![Diagrama del Pipeline en Jenkins](diagramaPipelineJenkins.png)
 
 ![Stages del Pipeline en Jenkins](stagesPipelineJenkins.png)
@@ -26,11 +28,11 @@ El diagrama muestra la arquitectura de la implementación en Kubernetes, creando
 
 ## 3. Instrucciones de Despliegue
 
-Sigue estos pasos para desplegar la aplicación:
+Se deben seguir los pasos descritos a continuación para desplegar la aplicación desde Jenkins:
 
-- Crea un pipeline en Jenkins.
-- Incluye todos los archivos y directorios del repositorio en el directorio workspace.
-- Añade el siguiente código a tu pipeline:
+- Crear un pipeline en Jenkins
+- Incluir todos los archivos y directorios del repositorio en el directorio workspace
+- Añadir el siguiente código a tu pipeline y ejecutar el pipeline:
 
 ```groovy
 pipeline {
@@ -84,5 +86,3 @@ pipeline {
         }
     }
 }
-'''
-- Ejecutar el pipeline y esperar a que se creen todos los recursos
