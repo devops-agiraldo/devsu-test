@@ -32,7 +32,7 @@ Se deben seguir los pasos descritos a continuación para desplegar la aplicació
 
 - Crear un pipeline en Jenkins
 - Incluir todos los archivos y directorios del repositorio en el directorio workspace
-- Añadir el siguiente código que está contenido en el fichero ![configPipeline.groovy](configPipeline.groovy) a tu pipeline y ejecutar el pipeline:
+- Añadir el siguiente código que está contenido en el fichero [configPipeline.groovy](configPipeline.groovy) a tu pipeline y ejecutar el pipeline:
 
 ```groovy
 pipeline {
