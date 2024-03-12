@@ -16,6 +16,8 @@ El pipeline consta de 5 stages:
 
 ![Stages del Pipeline en Jenkins](stagesPipelineJenkins.png)
 
+En el fichero [EjecucionCompletaPipelineJenkins.log](EjecucionCompletaPipelineJenkins.log) se puede evidenciar una salida real de un log completo de la ejecución del pipeline con todas sus stages.
+
 ## 2. Diagrama de Arquitectura de Kubernetes
 
 El diagrama muestra la arquitectura de la implementación en Kubernetes, creando diversos recursos como namespace, configmap, secret, serviceaccount, role, rolebinding, ingress, service y deployment.
@@ -82,4 +84,5 @@ pipeline {
         }
     }
 }
+'''
 - Ejecutar el pipeline y esperar a que se creen todos los recursos
