@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: devsu-test
+    yaml-version: "1.0"
+  name: devsu-test
+  namespace: devsu
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      k8s-app: devsu-test
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        k8s-app: devsu-test
+      name: devsu-test
+    spec:
+      containers:
+      - image: felipegiraldog93080/devsu-ag:latest
+        imagePullPolicy: IfNotPresent
+        name: devsu-test
+        livenessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - curl -f http://localhost:8000/api/swagger-ui/index.html
+          failureThreshold: 15
+          initialDelaySeconds: 120
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256M
+        envFrom:
+        - configMapRef:
+            name: devsu-configmap
+        - secretRef:
+            name: devsu-secret
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+      dnsPolicy: ClusterFirst
+      hostname: devsu-test
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: devsu-test
+      terminationGracePeriodSeconds: 60
