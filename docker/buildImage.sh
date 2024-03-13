@@ -10,7 +10,7 @@ mv ../demo-devops-java/ .
 docker build -t devsu-test:latest .
 
 echo "Logging in docker"
-echo "felipe2024" | docker login -u felipegiraldog93080 --password-stdin
+echo "pass" | docker login -u repo --password-stdin
 
 echo "Tagging the image"
 docker tag devsu-test:latest felipegiraldog93080/devsu-ag:latest
