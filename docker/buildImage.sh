@@ -13,9 +13,9 @@ echo "Logging in docker"
 echo "pass" | docker login -u repo --password-stdin
 
 echo "Tagging the image"
-docker tag devsu-test:latest felipegiraldog93080/devsu-ag:latest
+docker tag devsu-test:latest repo/devsu-ag:latest
 
 echo "Pushing the image to repository"
-docker push felipegiraldog93080/devsu-ag:latest
+docker push repo/devsu-ag:latest
 
 echo "Process completed successfully"
